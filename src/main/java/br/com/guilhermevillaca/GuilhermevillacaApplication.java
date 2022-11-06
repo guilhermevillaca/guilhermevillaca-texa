@@ -2,6 +2,7 @@ package br.com.guilhermevillaca;
 
 import aj.org.objectweb.asm.TypeReference;
 import br.com.guilhermevillaca.model.Filme;
+import br.com.guilhermevillaca.repository.FilmeRepository;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GuilhermevillacaApplication {
 
+    @Autowired
+    FilmeRepository filmeRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(GuilhermevillacaApplication.class, args);
     }
 
-    @GetMapping("filmes")
-    public ResponseEntity<List<Filme>> outroFilme() throws IOException {
-
+    @GetMapping("addFilmes")
+    public String addFilmes() throws IOException {
         List<Filme> filmes = new ArrayList<Filme>();
 
         InputStream is = TypeReference.class.getResourceAsStream("/csv/movielist.csv");
@@ -51,15 +55,25 @@ public class GuilhermevillacaApplication {
                 filme.setYear(csvMap.get("year"));
                 filme.setTitle(csvMap.get("title"));
                 filme.setStudios(csvMap.get("studios"));
-                filme.setProducer(csvMap.get("producers"));
+                filme.setProducers(csvMap.get("producers"));
                 filme.setWinner(csvMap.get("winner"));
                 filmes.add(filme);
+                filmeRepository.save(filme);
             }
 
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(GuilhermevillacaApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return "ok";
+
+    }
+
+    @GetMapping("filmes")
+    public ResponseEntity<List<Filme>> outroFilme() throws IOException {
+
+        List<Filme> filmes = new ArrayList<Filme>();
+        filmes = (List<Filme>) filmeRepository.findAll();
         return ResponseEntity.ok(filmes);
 
     }

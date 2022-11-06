@@ -1,17 +1,56 @@
-
 package br.com.guilhermevillaca.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author guilhermevillaca
  */
+@Entity
 public class Filme {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "ano")
     private String year;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "studios")
     private String studios;
-    private String producer;
+
+    @Column(name = "producers")
+    private String producers;
+
+    @Column(name = "winner")
     private String winner;
+
+    public Filme() {
+    }
+
+    public Filme(String year, String title, String studios, String producers, String winner) {
+        this.year = year;
+        this.title = title;
+        this.studios = studios;
+        this.producers = producers;
+        this.winner = winner;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getYear() {
         return year;
@@ -37,12 +76,12 @@ public class Filme {
         this.studios = studios;
     }
 
-    public String getProducer() {
-        return producer;
+    public String getProducers() {
+        return producers;
     }
 
-    public void setProducer(String producer) {
-        this.producer = producer;
+    public void setProducers(String producers) {
+        this.producers = producers;
     }
 
     public String getWinner() {
@@ -52,7 +91,5 @@ public class Filme {
     public void setWinner(String winner) {
         this.winner = winner;
     }
-    
-   
-    
+
 }

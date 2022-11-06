@@ -7,10 +7,11 @@
  * Created: Nov 6, 2022
  */
 
-CREATE TABLE filme(
+CREATE TABLE "filme"(
+  "id" int primary key not null,
   "year" VARCHAR(4) NOT NULL,
-  title VARCHAR(100) NOT NULL,
-  studio VARCHAR(100) NOT NULL,
-  producers VARCHAR(100) NOT NULL,
-  winner VARCHAR(100)
+  "title" VARCHAR(100) NOT NULL,
+  "studio" VARCHAR(100) NOT NULL,
+  "producers" VARCHAR(100) NOT NULL,
+  "winner" VARCHAR(100)
 );
