@@ -16,7 +16,7 @@ public class Filme {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private long id;
 
     @Column(name = "ano")
     private String year;
@@ -44,11 +44,11 @@ public class Filme {
         this.winner = winner;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

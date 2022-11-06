@@ -33,6 +33,16 @@ public class FilmeController {
         return ResponseEntity.ok(filmes);
     }
     
+    @RequestMapping(value = "/filme/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Filme> GetById(@PathVariable(value = "id") long id)
+    {
+        Optional<Filme> filme = filmeRepository.findById(id);
+        if(filme.isPresent())
+            return new ResponseEntity<Filme>(filme.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
     //post
     @RequestMapping(value = "/filme", method =  RequestMethod.POST)
     public Filme Post(@RequestBody Filme filme)
