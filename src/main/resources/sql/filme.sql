@@ -8,7 +8,6 @@
  */
 
 CREATE TABLE filme(
-  id INT NOT NULL,
   "year" VARCHAR(4) NOT NULL,
   title VARCHAR(100) NOT NULL,
   studio VARCHAR(100) NOT NULL,
