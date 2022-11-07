@@ -45,8 +45,8 @@ PUT para editar passando id do filme a ser alterado <br>
 http://localhost:8080/filme/207 <br> 
 ```json
 {
-    "year": "2022",
-    "title": "Poderoso Chefão 4",
+    "year": "2024",
+    "title": "Poderoso Chefão 5",
     "studios": "villaca",
     "producers": "Luís Villaca e Helô Villaca",
     "winner": "yes"
