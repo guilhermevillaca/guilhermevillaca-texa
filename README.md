@@ -9,11 +9,12 @@ Caso seja linux ou macos executar o comando:
 
 ```powershell
 ./mvnw spring-boot:run
-
+```
 ou 
 Caso seja windows executar o comando:
 ```powershell
 mvnw spring-boot:run
+```
 
 Caso dê algum erro verificar a versão do java, fiz o desenvolvimento com Java 17.
 
