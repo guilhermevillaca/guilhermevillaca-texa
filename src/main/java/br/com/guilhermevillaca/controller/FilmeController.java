@@ -75,6 +75,21 @@ public class FilmeController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    
+    @RequestMapping(value ="/filme/maiorIntervalo", method = RequestMethod.GET )
+    public ResponseEntity<List<Filme>> maiorIntervalo(){
+        List<Filme> filmes = new ArrayList<Filme>();
+        List<Filme> filmesDoProdutor = new ArrayList<Filme>();
+        filmes = (List<Filme>) filmeRepository.premioIntervalo();
+        
+        String producer;
+        for (Filme filme : filmes) {
+            filmesDoProdutor = (List<Filme>) filmeRepository.premioIntervaloPorProdutor(filme.getProducers());
+            return ResponseEntity.ok(filmesDoProdutor);
+        }
+        
+        return ResponseEntity.ok(filmes);
+    }
 
     
 }
