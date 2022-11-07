@@ -22,7 +22,16 @@ Caso dê algum erro verificar a versão do java, fiz o desenvolvimento com Java 
 O banco embarcado usado foi o h2, <br> 
 para conferir se está ok acessar http://localhost:8080/h2-console/ e usar a JDBC url jdbc:h2:mem:guilhermevillaca <br> 
 
-Foi criado FilmeController com os serviços REST <br> 
+Na classe principal GuilhermevillacaApplication tem o método main e um trecho de código que faz a leitura do CSV e o processo de persistir no banco, esse código é executado ao construir o projeto. <br>
+
+Foi criado um modelo que está no package <b>br.com.guilhermevillaca.model</b> chamado <b>Filme</b>, <br>
+com os atributos <i>id</i>, <i>year</i>, <i>title</i>, <i>studios</i>, <i>producers</i>, <i>winner</i>. <br>
+
+Foi criado um repositório no package <b>br.com.guilhermevillaca.repository</b> chamado <b>FilmeRepository</b> que extende <b>CrudRepository</b>,
+para automatizar as etapas de salvar, editar, deletar e consultar.
+
+Foi criado <b>FilmeController</b> com os serviços REST <br> 
+
 GET para retornar todos os registros <br> 
 http://localhost:8080/filme <br> 
 
@@ -41,7 +50,7 @@ http://localhost:8080/filme
 }
 ```
 
-PUT para editar passando id do filme a ser alterado <br> 
+PUT para editar passando id do filme a ser alterado, conforme exemplo abaixo <br> 
 http://localhost:8080/filme/207 <br> 
 ```json
 {
