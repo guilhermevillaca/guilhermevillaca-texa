@@ -1,12 +1,19 @@
 # guilhermevillaca-texa
 Teste vaga backend
 
+Para esse projeto foi utilizado o framework springboot, pensando em facilitar o desenvolvimento (ter servidor e banco embarcado) e a análise por parte da TEXA.
+
 Passos para reproduzir <br>
 fazer o clone do repositório <br>
+```powershell
+git clone https://github.com/guilhermevillaca/guilhermevillaca-texa.git
+```
 navegar pelo terminal até a pasta <br> 
+```powershell
+cd guilhermevillaca-texa
+```
 
 Caso seja linux ou macos executar o comando:
-
 ```powershell
 ./mvnw spring-boot:run
 ```
