@@ -1,9 +1,9 @@
 # guilhermevillaca-texa
 Teste vaga backend
 
-Passos para reproduzir
-fazer o clone do repositório
-navegar pelo terminal até a pasta 
+Passos para reproduzir <br>
+fazer o clone do repositório <br>
+navegar pelo terminal até a pasta <br> 
 
 Caso seja linux ou macos executar o comando:
 ./mvnw spring-boot:run
