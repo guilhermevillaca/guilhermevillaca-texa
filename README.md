@@ -3,6 +3,8 @@ Teste vaga backend
 
 Para esse projeto foi utilizado o framework springboot, pensando em facilitar o desenvolvimento (ter servidor e banco embarcado) e a análise por parte da TEXA.
 
+Foi utilizado o java 17 para este desenvolvimento.
+
 Passos para reproduzir <br>
 fazer o clone do repositório <br>
 ```powershell
@@ -22,9 +24,6 @@ Caso seja windows executar o comando:
 ```powershell
 mvnw spring-boot:run
 ```
-
-Caso dê algum erro verificar a versão do java, fiz o desenvolvimento com Java 17. <br> 
-
 
 O banco embarcado usado foi o h2, <br> 
 para conferir se está ok acessar http://localhost:8080/h2-console/ e usar a JDBC url jdbc:h2:mem:guilhermevillaca <br> 
