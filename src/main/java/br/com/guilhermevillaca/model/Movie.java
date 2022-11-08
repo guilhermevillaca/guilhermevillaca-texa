@@ -12,16 +12,16 @@ import javax.persistence.Table;
  * @author guilhermevillaca
  */
 @Entity
-@Table(name="filme")
-public class Filme {
+@Table(name="movie")
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
 
-    @Column(name = "ano")
-    private String year;
+    @Column(name = "movie_year")
+    private Long year;
 
     @Column(name = "title")
     private String title;
@@ -35,10 +35,10 @@ public class Filme {
     @Column(name = "winner")
     private String winner;
 
-    public Filme() {
+    public Movie() {
     }
 
-    public Filme(String year, String title, String studios, String producers, String winner) {
+    public Movie(Long year, String title, String studios, String producers, String winner) {
         this.year = year;
         this.title = title;
         this.studios = studios;
@@ -54,11 +54,11 @@ public class Filme {
         this.id = id;
     }
 
-    public String getYear() {
+    public Long getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(Long year) {
         this.year = year;
     }
 

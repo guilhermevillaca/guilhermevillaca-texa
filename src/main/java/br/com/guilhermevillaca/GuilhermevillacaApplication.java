@@ -1,8 +1,7 @@
 package br.com.guilhermevillaca;
 
 import aj.org.objectweb.asm.TypeReference;
-import br.com.guilhermevillaca.model.Filme;
-import br.com.guilhermevillaca.repository.FilmeRepository;
+import br.com.guilhermevillaca.model.Movie;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,13 +23,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.guilhermevillaca.repository.MovieRepository;
 
 @SpringBootApplication
 @RestController
 public class GuilhermevillacaApplication {
 
     @Autowired
-    FilmeRepository filmeRepository;
+    MovieRepository filmeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(GuilhermevillacaApplication.class, args);
@@ -40,7 +40,7 @@ public class GuilhermevillacaApplication {
     @Bean
     CommandLineRunner runner() {
         return args -> {
-            List<Filme> filmes = new ArrayList<Filme>();
+            List<Movie> filmes = new ArrayList<Movie>();
 
             InputStream is = TypeReference.class.getResourceAsStream("/csv/movielist.csv");
             //CSVFormat csvFormat = CSVFormat.DEFAULT;
@@ -54,9 +54,9 @@ public class GuilhermevillacaApplication {
                 Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
                 for (CSVRecord csvRecord : csvRecords) {
-                    Filme filme = new Filme();
+                    Movie filme = new Movie();
                     Map<String, String> csvMap = csvRecord.toMap();
-                    filme.setYear(csvMap.get("year"));
+                    filme.setYear(Long.valueOf(csvMap.get("year")));
                     filme.setTitle(csvMap.get("title"));
                     filme.setStudios(csvMap.get("studios"));
                     filme.setProducers(csvMap.get("producers"));
@@ -74,10 +74,10 @@ public class GuilhermevillacaApplication {
 
     //retorna lista de filmes
     @GetMapping("filmes")
-    public ResponseEntity<List<Filme>> outroFilme() throws IOException {
+    public ResponseEntity<List<Movie>> outroFilme() throws IOException {
 
-        List<Filme> filmes = new ArrayList<Filme>();
-        filmes = (List<Filme>) filmeRepository.findAll();
+        List<Movie> filmes = new ArrayList<Movie>();
+        filmes = (List<Movie>) filmeRepository.findAll();
         return ResponseEntity.ok(filmes);
 
     }

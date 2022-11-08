@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.guilhermevillaca;
 
 /**
  *
  * @author villaca
  */
-import br.com.guilhermevillaca.controller.FilmeController;
-import br.com.guilhermevillaca.model.Filme;
-import br.com.guilhermevillaca.repository.FilmeRepository;
+import br.com.guilhermevillaca.controller.MovieController;
+import br.com.guilhermevillaca.model.Movie;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import br.com.guilhermevillaca.repository.MovieRepository;
 
 @SpringBootTest
 
@@ -28,10 +24,10 @@ public class FilmeControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private FilmeController filmeController;
+    private MovieController filmeController;
 
     @Autowired
-    private FilmeRepository filmeRepository;
+    private MovieRepository filmeRepository;
 
     @BeforeEach
     public void setUp() {
@@ -60,8 +56,8 @@ public class FilmeControllerTest {
 
     @Test
     void update() throws Exception {
-        Filme filme = new Filme();
-        filme.setYear("2024");
+        Movie filme = new Movie();
+        filme.setYear(Long.valueOf(2024));
         filme.setProducers("Villaca Donin");
         filme.setTitle("Poderoso Chefão 5");
         filme.setStudios("Villaca");
