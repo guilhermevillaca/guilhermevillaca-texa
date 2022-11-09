@@ -3,7 +3,7 @@ Teste vaga backend
 
 Para esse projeto foi utilizado o framework springboot, pensando em facilitar o desenvolvimento (ter servidor e banco embarcado) e a análise por parte da TEXA.
 
-Foi utilizado o java 17 para este desenvolvimento.
+Foi utilizado o java 17 e IDE Netbeans.
 
 Passos para reproduzir <br>
 fazer o clone do repositório <br>
@@ -70,3 +70,7 @@ http://localhost:8080/filme/207 <br>
 
 DELETE para remover passando id <br> 
 http://localhost:8080/filme/207
+
+Os testes estão na classe MovieControllerTest. 
+Testes realizados direto pelo netbeans.
+Foram testados GET, POST, PUT e DELETE e a persistência dos dados pelo CSV.
