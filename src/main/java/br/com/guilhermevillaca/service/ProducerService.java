@@ -11,17 +11,17 @@ import java.util.stream.Collectors;
 import br.com.guilhermevillaca.repository.MovieRepository;
 
 @Service
-public class ProducerService {    
+public class ProducerService {
 
     @Autowired
-    private  MovieRepository filmeRepository;
+    private MovieRepository filmeRepository;
 
     public AwardInterval getIntervalAwards() {
         List<Movie> winningMovies = filmeRepository.premioIntervalo();
-        Map<String, List<Movie>> moviesByProducer = winningMovies.stream().collect(Collectors.groupingBy(Movie::getProducers));        
+        Map<String, List<Movie>> moviesByProducer = winningMovies.stream().collect(Collectors.groupingBy(Movie::getProducers));
         List<ProducerWin> wins = new ArrayList<>();
 
-        moviesByProducer.forEach((producer, movies) -> {            
+        moviesByProducer.forEach((producer, movies) -> {
             movies.sort(Comparator.comparing(Movie::getYear));
             if (movies.size() >= 2) {
                 movies.forEach(movie -> {

@@ -30,40 +30,51 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MovieService {
-    
+
     @Autowired
     MovieRepository filmeRepository;
-    
-    public void persisteCsv() throws IOException{
-        
+
+    public void persisteCsv() throws IOException {
+
         List<Movie> filmes = new ArrayList<Movie>();
 
-            InputStream is = TypeReference.class.getResourceAsStream("/csv/movielist.csv");
-            //CSVFormat csvFormat = CSVFormat.DEFAULT;
+        InputStream is = TypeReference.class.getResourceAsStream("/csv/movielist.csv");
+        //CSVFormat csvFormat = CSVFormat.DEFAULT;
 
-            BufferedReader fileReader;
-            try {
-                fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        BufferedReader fileReader;
+        try {
+            fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
-                CSVParser csvParser = new CSVParser(fileReader, CSVFormat.newFormat(';').withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
+            CSVParser csvParser = new CSVParser(fileReader, CSVFormat.newFormat(';').withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
 
-                Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
-                for (CSVRecord csvRecord : csvRecords) {
-                    Movie filme = new Movie();
-                    Map<String, String> csvMap = csvRecord.toMap();
-                    filme.setYear(Long.valueOf(csvMap.get("year")));
-                    filme.setTitle(csvMap.get("title"));
-                    filme.setStudios(csvMap.get("studios"));
-                    filme.setProducers(csvMap.get("producers"));
-                    filme.setWinner(csvMap.get("winner"));
-                    filmes.add(filme);
-                    filmeRepository.save(filme);
+            for (CSVRecord csvRecord : csvRecords) {
+                Map<String, String> csvMap = csvRecord.toMap();
+                String producers = csvMap.get("producers");
+                String[] produtores = producers.split("(and|,)");
+                for (int i = 0; i < produtores.length; i++) {
+                    if (produtores[i] != null) {
+                        Movie filme = new Movie();
+                        filme.setYear(Long.valueOf(csvMap.get("year")));
+                        filme.setTitle(csvMap.get("title"));
+                        filme.setStudios(csvMap.get("studios"));
+                        filme.setProducers(produtores[i].trim());
+                        filme.setWinner(csvMap.get("winner"));
+                        filmes.add(filme);
+                        filmeRepository.save(filme);
+                    }
                 }
-
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(GuilhermevillacaApplication.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(GuilhermevillacaApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
+    public String adjustmentTrimming(String strTrimming) {
+        strTrimming = strTrimming.replaceAll("^\\s+", "");
+        strTrimming = strTrimming.replaceAll("\\s+$", "");
+        return strTrimming;
+    }
 }
