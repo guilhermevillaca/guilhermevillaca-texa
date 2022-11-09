@@ -72,9 +72,4 @@ public class MovieService {
         }
     }
 
-    public String adjustmentTrimming(String strTrimming) {
-        strTrimming = strTrimming.replaceAll("^\\s+", "");
-        strTrimming = strTrimming.replaceAll("\\s+$", "");
-        return strTrimming;
-    }
 }
