@@ -16,6 +16,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import br.com.guilhermevillaca.repository.MovieRepository;
+import br.com.guilhermevillaca.service.MovieService;
+import java.io.IOException;
+import java.util.Optional;
 
 @SpringBootTest
 
@@ -24,19 +27,30 @@ public class FilmeControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private MovieController filmeController;
+    private MovieController movieController;
 
     @Autowired
-    private MovieRepository filmeRepository;
+    private MovieRepository movieRepository;
+    
+    @Autowired
+    private MovieService movieService;
 
     @BeforeEach
     public void setUp() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(filmeController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();
     }
 
     @Test
     public void testGETFilmeController() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/filme")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    
+    @Test
+    public void testPersistirCsv() throws IOException, Exception{
+        this.movieService.persisteCsv();        
+        Optional<Movie> movie = this.movieRepository.findById(Long.valueOf("50"));
+        System.out.println(movie.get());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/filme/50")).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -62,7 +76,7 @@ public class FilmeControllerTest {
         filme.setTitle("Poderoso Chefão 5");
         filme.setStudios("Villaca");
         filme.setWinner("yes");
-        filme = this.filmeRepository.save(filme);
+        filme = this.movieRepository.save(filme);
 
         JSONObject json = new JSONObject();
         json.put("year", "2034");

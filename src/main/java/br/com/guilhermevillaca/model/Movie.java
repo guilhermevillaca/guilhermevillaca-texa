@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @author guilhermevillaca
  */
 @Entity
-@Table(name="movie")
+@Table(name = "movie")
 public class Movie {
 
     @Id
@@ -92,6 +92,11 @@ public class Movie {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" + "id=" + id + ", year=" + year + ", title=" + title + ", studios=" + studios + ", producers=" + producers + ", winner=" + winner + '}';
     }
 
 }
