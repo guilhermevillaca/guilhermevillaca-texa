@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @SpringBootTest
 
-public class FilmeControllerTest {
+public class MovieControllerTest {
 
     private MockMvc mockMvc;
 
