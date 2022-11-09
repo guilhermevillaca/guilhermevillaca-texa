@@ -71,6 +71,9 @@ http://localhost:8080/filme/207 <br>
 DELETE para remover passando id <br> 
 http://localhost:8080/filme/207
 
+Para conferir o o produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido <br>
+http://localhost:8080/filme/maiorIntervalo
+
 Os testes estão na classe MovieControllerTest. 
 Testes realizados direto pelo netbeans.
 Foram testados GET, POST, PUT e DELETE e a persistência dos dados pelo CSV.
